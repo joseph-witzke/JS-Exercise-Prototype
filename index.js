@@ -111,18 +111,33 @@ function Airplane(name) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
+ function Baby(name, age, favoriteToy){
+   Person.call(this, name, age);
+   this.favoriteToy = favoriteToy;
   }
+  Baby.prototype = Object.create(Person.prototype);//this tells the baby to inherit the person's methods
+  //Any special methods that belong to the baby we write seperatley
+  Baby.prototype.play = function(){
+    return `playing with ${this.favoriteToy}`;
+  }
+
+  const Joe = new Baby('Joe', 36, 'frisbee');
+
+  console.log(Joe.toString());
+  console.log(Joe.play());
+
  
   
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. Whenever a function is in the global scope(window), the value of "this" inside of
+    that function will be the window object. 
+    2. When a function is called with a preceeding dot, the object to the left
+    of the dot is the "this".
+    3. Whenever a constructor function is used "this" refers to the specific instance of the
+    object that is created and returned by the constructor. 
+    4. When using call, apply, or bind, "this" is explicitly defined.
   */
   
   
